@@ -3,6 +3,7 @@ import { Player } from "../entities/Player";
 import { World } from "../entities/World";
 import { Laser } from "../entities/Laser";
 import { Asteroid } from "../entities/Asteroid";
+import { AudioPlayer } from "../service/Audio";
 
 export class GameController {
   private app: PIXI.Application;
@@ -15,11 +16,15 @@ export class GameController {
   private shootCooldown: number = 250; // milliseconds between shots
   private asteroidSpawnInterval: number = 2000; // Spawn asteroid every 2 seconds
   private lastAsteroidSpawn: number = 0;
+  private laserSound: AudioPlayer;
+  private explosionSound: AudioPlayer;
 
   constructor(app: PIXI.Application) {
     this.app = app;
     this.world = new World(app.screen.width, app.screen.height);
     this.player = new Player(app);
+    this.laserSound = new AudioPlayer("./public/assets/laser-shoot.wav", 0.5); // 50% volume
+    this.explosionSound = new AudioPlayer("./sounds/explosion.wav", 0.7); // 70% volume
     this.setupInput();
   }
 
@@ -105,9 +110,10 @@ export class GameController {
         if (this.checkCollision(laser.displayObject, asteroid.displayObject)) {
           if (asteroid.special) {
             console.log("Hit special asteroid!");
-            // You can add special effects or scoring here
+            this.explosionSound.play();
           } else {
             console.log("Hit normal asteroid");
+            this.explosionSound.play();
           }
           // Remove both laser and asteroid
           this.app.stage.removeChild(laser.displayObject);
@@ -137,6 +143,7 @@ export class GameController {
     );
     this.lasers.push(laser);
     this.app.stage.addChild(laser.displayObject);
+    this.laserSound.play();
   }
 
   private spawnAsteroid(): void {
