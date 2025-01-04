@@ -2,7 +2,6 @@ import * as PIXI from "pixi.js";
 
 export class Player {
   private sprite: PIXI.Sprite;
-  private speed: number = 5;
   public velocity: PIXI.Point = new PIXI.Point(0, 0);
   public rotationSpeedInDegrees: number = 5;
   private acceleration: number = 0.1;
