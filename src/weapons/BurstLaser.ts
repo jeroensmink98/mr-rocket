@@ -6,10 +6,10 @@ export class BurstLaser extends BaseWeapon {
   constructor(app: PIXI.Application) {
     const stats: WeaponStats = {
       damage: 3,
-      cooldown: 1200, // Longer cooldown
+      cooldown: 1400, // Longer cooldown
       speed: 18,
       color: 0xff69b4, // Pink color
-      size: { width: 2, height: 5 }, // Smaller lasers
+      size: { width: 2, height: 10 }, // Smaller lasers
     };
     super(app, stats);
   }
