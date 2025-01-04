@@ -5,11 +5,21 @@ export class Asteroid {
   private velocity: PIXI.Point;
   private minSpeed: number = 0.5;
   private maxSpeed: number = 5;
+  private isSpecial: boolean;
+  private static SPECIAL_CHANCE: number = 0.04; // 1/25 chance (4%)
 
   constructor(app: PIXI.Application, targetX: number, targetY: number) {
+    this.isSpecial = Math.random() < Asteroid.SPECIAL_CHANCE;
+
     // Create the asteroid sprite
     const graphics = new PIXI.Graphics();
-    graphics.fill(0x8b4513);
+    if (this.isSpecial) {
+      // Special asteroid: purple/magenta color
+      graphics.fill(0xff00ff);
+    } else {
+      // Normal asteroid: brown color
+      graphics.fill(0x8b4513);
+    }
     graphics.circle(0, 0, 20);
     graphics.fill();
 
@@ -72,5 +82,9 @@ export class Asteroid {
       this.sprite.y < -margin ||
       this.sprite.y > height + margin
     );
+  }
+
+  public get special(): boolean {
+    return this.isSpecial;
   }
 }

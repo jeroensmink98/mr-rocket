@@ -103,7 +103,12 @@ export class GameController {
       // Check for collisions with asteroids
       this.asteroids = this.asteroids.filter((asteroid) => {
         if (this.checkCollision(laser.displayObject, asteroid.displayObject)) {
-          console.log("hit");
+          if (asteroid.special) {
+            console.log("Hit special asteroid!");
+            // You can add special effects or scoring here
+          } else {
+            console.log("Hit normal asteroid");
+          }
           // Remove both laser and asteroid
           this.app.stage.removeChild(laser.displayObject);
           this.app.stage.removeChild(asteroid.displayObject);
