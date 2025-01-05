@@ -1,10 +1,10 @@
 import * as PIXI from "pixi.js";
 import { Game } from "./Game";
 import { AssetLoader } from "./AssetLoader";
-import { assets } from "./assets";
+import { assets, sounds } from "./assets";
 
 const width = 640;
-const height = 840;
+const height = 800;
 
 (async () => {
   const app = new PIXI.Application();
@@ -14,10 +14,8 @@ const height = 840;
   });
 
   const assetLoader = new AssetLoader();
-  await assetLoader.loadAll(assets);
+  await assetLoader.loadAll(assets, sounds);
 
   const game = new Game(app, assetLoader);
-  game.start();
-
   document.body.appendChild(app.canvas);
 })();

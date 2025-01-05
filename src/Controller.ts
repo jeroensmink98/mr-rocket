@@ -7,7 +7,6 @@ export class Controller {
 
   private initializeKeyListeners(): void {
     window.addEventListener("keydown", (e) => {
-      console.log("keydown", e.key);
       this.keys[e.key] = true;
     });
 
@@ -35,5 +34,17 @@ export class Controller {
 
   public isMovingDown(): boolean {
     return this.isKeyPressed("ArrowDown") || this.isKeyPressed("s");
+  }
+
+  public isRotatingLeft(): boolean {
+    return this.isKeyPressed("q") || this.isKeyPressed("Q");
+  }
+
+  public isRotatingRight(): boolean {
+    return this.isKeyPressed("e") || this.isKeyPressed("E");
+  }
+
+  public isShootPressed(): boolean {
+    return this.isKeyPressed(" ");
   }
 }
