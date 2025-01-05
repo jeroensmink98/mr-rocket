@@ -1,5 +1,8 @@
 import * as PIXI from "pixi.js";
-import { GameController } from "./controllers/GameController";
+import { Game } from "./Game";
+import { AssetLoader } from "./AssetLoader";
+import { assets } from "./assets";
+
 const width = 640;
 const height = 840;
 
@@ -9,10 +12,12 @@ const height = 840;
     width,
     height,
   });
-  console.log("app initialized");
 
-  const gameController = new GameController(app);
-  gameController.start();
+  const assetLoader = new AssetLoader();
+  await assetLoader.loadAll(assets);
+
+  const game = new Game(app, assetLoader);
+  game.start();
 
   document.body.appendChild(app.canvas);
 })();

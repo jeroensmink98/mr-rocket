@@ -41,4 +41,8 @@ export class World {
   public get height(): number {
     return this.bounds.height;
   }
+
+  public isWithinBounds(x: number, y: number): boolean {
+    return this.bounds.contains(x, y);
+  }
 }
