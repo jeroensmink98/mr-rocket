@@ -6,7 +6,7 @@ export class StandardLaser extends BaseWeapon {
   constructor(app: PIXI.Application) {
     const stats: WeaponStats = {
       damage: 10,
-      cooldown: 250,
+      cooldown: 500,
       speed: 20,
       color: 0xff0000,
       size: { width: 2, height: 20 },
